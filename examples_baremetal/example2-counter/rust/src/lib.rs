@@ -8,6 +8,7 @@ use solana_program::{
     pubkey::Pubkey,
 };
 
+
 /// Defines the structure of the state stored in the on-chain account
 #[derive(BorshSerialize, BorshDeserialize, Debug, Clone, BorshSchema)]
 pub struct GreetingStruct {
@@ -31,7 +32,9 @@ pub fn process_instruction(
     // Get the account to say hello to
     let hello_account = next_account_info(accounts_iter)?;
 
-    msg!("[lib] hello account: {:?}", hello_account.key);
+
+    // Log the Lamport balance of the hello_account
+    msg!("Lamport balance of hello_account: {}", hello_account.lamports());
 
     // The account must be owned by the program in order to modify its data
     if hello_account.owner != program_id {
